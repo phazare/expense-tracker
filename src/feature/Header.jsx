@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useToggle } from "../hooks/useToggle";
 
 export const Header = () => {
     const navigate = useNavigate();
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useToggle(false);
     return <>
         <nav className="bg-white border-b shadow-sm">
             <div className="mx-auto max-w-7xl px-4">
@@ -26,7 +26,7 @@ export const Header = () => {
                     {/* Mobile button */}
                     <button
                         className="md:hidden text-gray-600"
-                        onClick={() => setOpen(!open)}
+                        onClick={() => setOpen(open)}
                     >
                         ☰
                     </button>

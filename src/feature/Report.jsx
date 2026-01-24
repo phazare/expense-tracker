@@ -1,17 +1,33 @@
 import { useParams } from "react-router-dom";
 import { useItem } from "../context/ItemProvider";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { useDebounce } from "../hooks/useDebounce";
+import { useState, useEffect } from "react";
 
 function Report() {
     const items = useItem();
     const { id } = useParams();
+    const [search, setSearch] = useState('');
+    const debouncedSearch = useDebounce(search, 500)
     const itemList = items.state.filter(x => {
         return items.months[new Date(x.date).getMonth()].toLowerCase() == id
     }).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
     const rowCount = itemList.length;
     const total = itemList.reduce((acc, curr) => Number(acc) + Number(curr.amount), 0)
+    function handleInputChange(event) {
+        console.log(event.target.value);
+        setSearch(event.target.value)
+    }
+    useEffect(() => {
+        if (debouncedSearch) {
+            console.log("Trigger API with:", debouncedSearch);
+            // API call here
+        }
+    }, [debouncedSearch]);
     return <>
+        <div><input name='search' className="w-full max-w-sm rounded-lg border border-gray-300 px-4 py-2 text-sm 
+             focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 mt-4 mx-4" placeholder="Search..." type="text" value={search} onChange={handleInputChange} /></div>
         {rowCount > 0 &&
             <table className="mt-4 mx-auto w-full max-w-[400px] border border-gray-200 rounded-xl bg-white text-center">
                 <thead className="bg-gray-100">
