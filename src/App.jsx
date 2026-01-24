@@ -16,16 +16,16 @@ function App() {
         <ItemProvider>
           <Header />
           <Routes>
-            <Route path='/' element={<Login />}>
-            </Route>
-            <Route path='/dashboard' element={<Dashboard />}></Route>
+            {/* <Route path='/' element={<Login />}> */}
+            {/* </Route> */}
+            <Route path='/' element={<Dashboard />}></Route>
             <Route path='/view-report/:id' element={<Report />}></Route>
             <Route path='/add-expense' element={<AddExpense />}></Route>
             <Route path='/edit-expense/:id' element={<AddExpense />}></Route>
             <Route path='*' element={<PageNotFound />}></Route>
           </Routes>
         </ItemProvider>
-      </BrowserRouter>
+      </BrowserRouter >
     </>
   )
 }

@@ -1,10 +1,12 @@
 import { createContext, useContext, useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ExcelJS from "exceljs";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const ItemContext = createContext();
 function ItemProvider({ children }) {
-    const [state, dispatch] = useReducer(itemReducer, !!localStorage.getItem('formData') ? JSON.parse(localStorage.getItem('formData')) : []);
+    const [storedValue, setStoredValue] = useLocalStorage('formData');
+    const [state, dispatch] = useReducer(itemReducer, storedValue);
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         date: null,
@@ -29,17 +31,17 @@ function ItemProvider({ children }) {
         switch (action.type) {
             case 'add': {
                 const newData = [...state, action.payload];
-                localStorage.setItem('formData', JSON.stringify(newData))
+                setStoredValue(newData)
                 return newData
             }
             case 'delete': {
                 const updatedData = state.filter(x => x.id !== action.payload);
-                localStorage.setItem('formData', JSON.stringify(updatedData));
+                setStoredValue(updatedData)
                 return [...updatedData];
             }
             case 'update': {
                 const updated = state.map(data => data.id === action.payload.id ? action.payload : data);
-                localStorage.setItem('formData', JSON.stringify(updated))
+                setStoredValue(updated)
                 return updated
             }
             default: return state

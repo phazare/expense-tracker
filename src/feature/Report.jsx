@@ -70,9 +70,13 @@ function Report() {
                 </tfoot>
             </table>
         }
-        {rowCount === 0 && <h2>No data available</h2>}
-        <button className="mx-auto mt-4 flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm
-    hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 active:scale-95 transition sursor-pointer" onClick={() => items.exportToExcel(id)}>Export</button>
+        {rowCount > 0 && <button className="mx-auto mt-4 flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-sm font-semibold text-white shadow-sm
+    hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-400 active:scale-95 transition sursor-pointer" onClick={() => items.exportToExcel(id)}>Export</button>}
+        {rowCount === 0 && <div className="flex h-full min-h-[60vh] items-center justify-center">
+            <p className="text-gray-500 text-lg">
+                No data available
+            </p>
+        </div>}
     </>
 }
 

@@ -9,16 +9,16 @@ export const Header = () => {
                     <h1 className='text-3xl font-bold'>Expense Tracker</h1>
                     {/* Desktop menu */}
                     <div className="hidden md:flex items-center gap-6">
-                        <a href="#" className="text-gray-600 hover:text-blue-600" onClick={() => navigate('/dashboard')}>
+                        <a href="#" className="text-gray-600 hover:text-blue-600" onClick={() => navigate('/')}>
                             Dashboard
                         </a>
                         <a href="#" className="text-gray-600 hover:text-blue-600" onClick={() => navigate('/add-expense')}>
                             Add expenses
                         </a>
 
-                        <button className="rounded-lg bg-blue-600 cursor-pointer px-4 py-2 text-white hover:bg-blue-700" onClick={() => navigate('/')}>
+                        {/* <button className="rounded-lg bg-blue-600 cursor-pointer px-4 py-2 text-white hover:bg-blue-700" onClick={() => navigate('/')}>
                             Login
-                        </button>
+                        </button> */}
                     </div>
 
                     {/* Mobile button */}

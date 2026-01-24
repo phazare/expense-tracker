@@ -1,12 +1,7 @@
 import { useItem } from "../context/ItemProvider";
-import { useLocalStorage } from "../hooks/useLocalStorage";
 import MonthList from './MonthList'
 function Dashboard() {
     const item = useItem();
-    const [value, setValue] = useLocalStorage('test', [])
-    function setVal() {
-        setValue([{ 'name': 'palak' }])
-    }
     return <>
         <div className="grid grid-cols-1 gap-6 text-center">
             {item.data.map((list, index) =>
@@ -16,8 +11,6 @@ function Dashboard() {
                 </div>
             )
             }
-            <button onClick={setVal}>Add localStorage</button>
-            <div>{JSON.stringify(value)}</div>
         </div>
     </>
 }
