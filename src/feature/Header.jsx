@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [open, setOpen] = useState(false)
     return <>
         <nav className="bg-white border-b shadow-sm">
             <div className="mx-auto max-w-7xl px-4">
@@ -39,14 +41,11 @@ export const Header = () => {
                             Dashboard
                         </a>
                         <a className="text-gray-600 hover:text-blue-600" href="#">
-                            Expenses
+                            Add expenses
                         </a>
-                        <a className="text-gray-600 hover:text-blue-600" href="#">
-                            Reports
-                        </a>
-                        <button className="mt-2 rounded-lg bg-blue-600 px-4 py-2 text-white">
+                        {/* <button className="mt-2 rounded-lg bg-blue-600 px-4 py-2 text-white">
                             Login
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             )}
