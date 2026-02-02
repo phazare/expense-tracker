@@ -119,7 +119,7 @@ function Report() {
             <p className="text-gray-500 text-lg">
                 No data available
             </p>
-            <input type="file" onChange={importFile} />
+            {/* <input type="file" onChange={importFile} /> */}
         </div>}
     </>
 }
