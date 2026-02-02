@@ -8,12 +8,12 @@ function MonthCard({ month }) {
         onClick={() => item.openReports(month)}
         className="cursor-pointer bg-green-100 rounded-lg p-4 sm:p-6 m-3 text-blue-600"
     >
-        <h2 className="text-lg sm:text-2xl text-gray-900 font-bold truncate">
+        <h2 className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-900 font-bold truncate">
             {month}
         </h2>
 
-        <p className="mt-2 text-lg sm:text-2xl font-bold text-gray-900 break-words">
-            ${total || 0}
+        <p className="mt-2 text-sm sm:text-base md:text-lg lg:text-xl font-bold text-gray-900 break-words">
+            ${total.toFixed(2) || 0}
         </p>
     </div>
 }

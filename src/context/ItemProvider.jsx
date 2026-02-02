@@ -19,14 +19,11 @@ function ItemProvider({ children }) {
     const currentMonth = new Date().getMonth();
     const data = [
         {
-            year: new Date().getFullYear() - 1,
-            allowedMonths: months.slice(-2)
-        },
-        {
             year: new Date().getFullYear(),
-            allowedMonths: [months[new Date().getMonth()]]
+            allowedMonths: [months[new Date().getMonth() - 1], months[new Date().getMonth()]]
         }
     ]
+
     function itemReducer(state, action) {
         switch (action.type) {
             case 'add': {
@@ -112,7 +109,7 @@ function ItemProvider({ children }) {
         a.click();
     }
 
-    return <ItemContext.Provider value={{ months, openReports, currentMonth, state, dispatch, data, editExpense, editableRecord, dataChanged, dateChanged, submitDetails, formData, setFormData, exportToExcel }}>{children}</ItemContext.Provider>
+    return <ItemContext.Provider value={{ months, openReports, currentMonth, state, dispatch, data, editExpense, editableRecord, setEditableRecord, dataChanged, dateChanged, submitDetails, formData, setFormData, exportToExcel }}>{children}</ItemContext.Provider>
 }
 export const useItem = () => useContext(ItemContext);
 

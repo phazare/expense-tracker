@@ -16,8 +16,6 @@ function App() {
         <ItemProvider>
           <Header />
           <Routes>
-            {/* <Route path='/' element={<Login />}> */}
-            {/* </Route> */}
             <Route path='/' element={<Dashboard />}></Route>
             <Route path='/view-report/:id' element={<Report />}></Route>
             <Route path='/add-expense' element={<AddExpense />}></Route>

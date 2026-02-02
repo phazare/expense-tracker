@@ -17,10 +17,6 @@ export const Header = () => {
                         <a href="#" className="text-gray-600 hover:text-blue-600" onClick={() => navigate('/add-expense')}>
                             Add expenses
                         </a>
-
-                        {/* <button className="rounded-lg bg-blue-600 cursor-pointer px-4 py-2 text-white hover:bg-blue-700" onClick={() => navigate('/')}>
-                            Login
-                        </button> */}
                     </div>
 
                     {/* Mobile button */}
@@ -37,15 +33,12 @@ export const Header = () => {
             {open && (
                 <div className="md:hidden border-t bg-white">
                     <div className="flex flex-col gap-3 px-4 py-4" >
-                        <a className="text-gray-600 hover:text-blue-600" href="#" onClick={() => navigate('/dashboard')}>
+                        <a className="text-gray-600 hover:text-blue-600" href="#" onClick={() => { navigate('/'); setOpen(open); }}>
                             Dashboard
                         </a>
-                        <a className="text-gray-600 hover:text-blue-600" href="#">
+                        <a className="text-gray-600 hover:text-blue-600" href="#" onClick={() => { navigate('/add-expense'); setOpen(open); }}>
                             Add expenses
                         </a>
-                        {/* <button className="mt-2 rounded-lg bg-blue-600 px-4 py-2 text-white">
-                            Login
-                        </button> */}
                     </div>
                 </div>
             )}

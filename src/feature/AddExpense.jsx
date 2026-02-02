@@ -6,6 +6,7 @@ function AddExpense() {
     const item = useItem();
 
     useEffect(() => {
+        console.log("item.editableRecord", item.editableRecord)
         if (item.editableRecord) {
             item.setFormData(() => ({
                 date: item.editableRecord[0].date,
@@ -13,6 +14,17 @@ function AddExpense() {
                 amount: item.editableRecord[0].amount,
                 id: item.editableRecord[0].id
             }))
+        } else {
+            item.setFormData(() => ({
+                date: null,
+                category: '',
+                amount: '',
+                id: null
+            }));
+        }
+
+        return () => {
+            item.setEditableRecord(null);
         }
     }, [item.editableRecord])
     const isFormValid =
@@ -21,7 +33,7 @@ function AddExpense() {
         Number(item.formData.amount) > 0;
 
     return <>
-        <form className="space-y-4 max-w-[400px] mx-auto mt-4">
+        <form className="space-y-4 max-w-[400px] mx-auto mt-4 px-4 sm:px-0">
             <div>
                 <label className="mb-1 block text-sm font-medium text-gray-600">
                     Date
