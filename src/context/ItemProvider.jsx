@@ -51,7 +51,7 @@ function ItemProvider({ children }) {
         }))
     }
     function dateChanged(event) {
-        setFormData(prev => ({ ...prev, date: event }))
+        setFormData(prev => ({ ...prev, date: new Date(event).toISOString() }))
     }
     function editExpense(id) {
         setEditableRecord(state.filter(x => x.id == id));

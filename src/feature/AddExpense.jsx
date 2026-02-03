@@ -6,7 +6,6 @@ function AddExpense() {
     const item = useItem();
 
     useEffect(() => {
-        console.log("item.editableRecord", item.editableRecord)
         if (item.editableRecord) {
             item.setFormData(() => ({
                 date: item.editableRecord[0].date,

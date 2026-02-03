@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useItem } from "../context/ItemProvider";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { useDebounce } from "../hooks/useDebounce";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import ExcelJS from "exceljs";
 
 function Report() {
@@ -10,19 +10,20 @@ function Report() {
     const { id } = useParams();
     const [search, setSearch] = useState('');
     const debouncedSearch = useDebounce(search, 500)
-    const itemList = items.state.filter(x => {
-        return items.months[new Date(x.date).getMonth()].toLowerCase() == id
-    }).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    const [filteredList, setFilteredList] = useState(itemList)
+    const itemList = useMemo(() => {
+        return items.state.filter(x => items.months[new Date(x.date).getMonth()].toLowerCase() == id
+        ).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    }, [items.state, id])
+    const filteredList = useMemo(() => {
+        return itemList.filter(searchList => searchList.category.toLowerCase().includes(debouncedSearch.toLowerCase()));
+    }, [itemList, debouncedSearch])
 
     const rowCount = filteredList.length;
     const total = filteredList.reduce((acc, curr) => Number(acc) + Number(curr.amount), 0)
     function handleInputChange(event) {
-        console.log(event.target.value);
         setSearch(event.target.value)
     }
     function importFile(e) {
-        console.log(e.target.files[0]);
         const file = e.target.files[0];
         if (!file) return
         const workbook = new ExcelJS.Workbook();
@@ -44,14 +45,10 @@ function Report() {
                     amount: row.getCell(3).value,
                 });
             });
-
-            console.log(rows);
         };
         reader.readAsArrayBuffer(file);
     }
-    useEffect(() => {
-        setFilteredList(itemList.filter(searchList => searchList.category.toLowerCase().includes(debouncedSearch.toLowerCase())));
-    }, [debouncedSearch]);
+
     return <>
         <div className="text-center"><input name='search' className="w-full max-w-sm rounded-lg border border-gray-300 px-4 py-2 text-sm 
              focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 mt-4 mx-4" placeholder="Search..." type="text" value={search} onChange={handleInputChange} /></div>
@@ -119,7 +116,6 @@ function Report() {
             <p className="text-gray-500 text-lg">
                 No data available
             </p>
-            {/* <input type="file" onChange={importFile} /> */}
         </div>}
     </>
 }
